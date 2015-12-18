@@ -1,0 +1,9 @@
+.DS_Store
+/*.iml
+/.idea
+Thumbs.db
+.*.swp
+*.class
+bin/
+gen/
+out/
