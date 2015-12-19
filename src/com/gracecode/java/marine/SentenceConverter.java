@@ -1,6 +1,5 @@
 package com.gracecode.java.marine;
 
-import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CoordinateConverter;
 import com.amap.api.maps.model.LatLng;
 import net.sf.marineapi.nmea.event.SentenceEvent;
@@ -9,6 +8,7 @@ import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.sentence.RMCSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.util.Position;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -35,7 +35,7 @@ public class SentenceConverter implements SentenceListener {
     private final JSONObject jsonObject;
     private final File outputFile;
     private float distance = 0;
-    private LatLng lastRecordedLocation;
+    private Position lastRecordedLocation;
     private SimpleDateFormat simpleDateFormatter;
     private double topSpeed = 0;
     private double averageSpeed = 0;
@@ -92,25 +92,26 @@ public class SentenceConverter implements SentenceListener {
     @Override
     public void sentenceRead(SentenceEvent sentenceEvent) {
         try {
-            RMCSentence s = (RMCSentence) sentenceEvent.getSentence();
-            LatLng location = getConvertedLocation(new LatLng(s.getPosition().getLatitude(), s.getPosition().getLongitude()));
+            RMCSentence sentence = (RMCSentence) sentenceEvent.getSentence();
+            Position position = sentence.getPosition();
 
+            LatLng location = getConvertedLocation(new LatLng(position.getLatitude(), position.getLongitude()));
             if (lastRecordedLocation != null) {
-                distance += AMapUtils.calculateLineDistance(lastRecordedLocation, location);
+                distance += position.distanceTo(lastRecordedLocation);
             }
-            lastRecordedLocation = location;
+            lastRecordedLocation = position;
 
             JSONObject item = new JSONObject();
             item.put("longitude", location.longitude);
             item.put("latitude", location.latitude);
-            item.put("speed", s.getSpeed()); // 1knots = 1.852 km/h
-            item.put("date", parseDate(s));
-            item.put("course", s.getCourse());
+            item.put("speed", sentence.getSpeed()); // 1knots = 1.852 km/h
+            item.put("date", parseDate(sentence));
+            item.put("course", sentence.getCourse());
 
-            if (topSpeed <= s.getSpeed()) {
-                topSpeed = s.getSpeed();
+            if (topSpeed <= sentence.getSpeed()) {
+                topSpeed = sentence.getSpeed();
             }
-            averageSpeed += s.getSpeed();
+            averageSpeed += sentence.getSpeed();
 
             locationsJsonArray.put(item);
 //            locationsJsonArray.put(new double[]{location.longitude, location.latitude});
