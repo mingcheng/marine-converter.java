@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 public class Main {
     private static final String SOURCE_DIR = "/Users/mingcheng/Desktop/NMEA/";
-    private static final String OUTPUT_DIR = "/Users/mingcheng/Sites/NMEA/json/";
+    private static final String OUTPUT_DIR = "/Users/mingcheng/Desktop/json/";
     private static final int THREAD_NUM = 10;
 
     private static ExecutorService threadPool;
@@ -40,7 +40,7 @@ public class Main {
         for (File NMEAFile : NMEAFiles) {
             File JSONFile = getJSONFileFromNMEAFile(NMEAFile);
             try {
-                threadPool.submit(new ConverterRunnable(NMEAFile, JSONFile));
+                threadPool.execute(new ConverterRunnable(NMEAFile, JSONFile));
             } catch (IOException e) {
                 e.printStackTrace();
             }
