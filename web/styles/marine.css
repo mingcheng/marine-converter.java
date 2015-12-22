@@ -18,12 +18,15 @@
 }
 
 .controller {
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    border-radius: 2px;
+    user-select: none;
     position: fixed;
     right: 1em;
     top: 1em;
     z-index: 9999;
     padding: .5em;
-    opacity: .9;
+    opacity: .95;
     border: 1px solid #ddd;
     background: white;
 }
