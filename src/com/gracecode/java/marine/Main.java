@@ -50,7 +50,8 @@ public class Main {
                 throw new IOException(NMEADirectory.getAbsolutePath() + " is NOT readable.");
             }
 
-            if (!JSONDirectory.canWrite() || !JSONDirectory.isDirectory()) {
+            if ((!JSONDirectory.exists() && !JSONDirectory.mkdirs())
+                    || !JSONDirectory.canWrite() || !JSONDirectory.isDirectory()) {
                 throw new IOException(JSONDirectory.getAbsolutePath() + " is NOT writable.");
             }
 
@@ -62,9 +63,11 @@ public class Main {
             });
 
             for (File NMEAFile : NMEAFiles) {
-                File JSONFile = getJSONFileFromNMEAFile(NMEAFile);
                 try {
-                    threadPool.execute(new ConverterRunnable(NMEAFile, JSONFile));
+                    File JSONFile = getJSONFileFromNMEAFile(NMEAFile);
+                    if (!JSONFile.exists()) {
+                        threadPool.execute(new ConverterRunnable(NMEAFile, JSONFile));
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -78,6 +81,6 @@ public class Main {
 
     private static File getJSONFileFromNMEAFile(File NMEAFile) {
         String basename = NMEAFile.getName().replaceAll("[.][^.]+$", "");
-        return new File(JSONDirectory.getAbsolutePath() + File.pathSeparator + basename + ".json");
+        return new File(JSONDirectory.getAbsolutePath() + File.separator + basename + ".json");
     }
 }
