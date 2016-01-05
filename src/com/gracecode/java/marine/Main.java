@@ -9,8 +9,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-    //    private static final String SOURCE_DIR = "/Users/mingcheng/Desktop/NMEA/";
-//    private static final String OUTPUT_DIR = "/Users/mingcheng/Desktop/json/";
     private static final int THREAD_NUM = 10;
     private static File NMEADirectory;
     private static File JSONDirectory;

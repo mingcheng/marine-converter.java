@@ -8,3 +8,5 @@ bin/
 gen/
 out/
 web/json/*.json
+META*
+web/NMEA
