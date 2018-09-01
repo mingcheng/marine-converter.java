@@ -1,10 +1,10 @@
-# NMEA 日志文件转换为 JSON 格式，同时在地图显示
+# NMEA 日志文件转换为 JSON 格式，同时在地图显示
 
 ![http://files.gracecode.com/2015_12_22/1450775876@800.png](https://friable.rocks/_/2015_12_22/1450775876@800.png)
 
-本人实用的车载导航其中有个叫 DSA 软件的可以记录导航的原生 NMEA 信息，因此有考虑将其中的信息统计并显示到地图上的想法。
+本人实用的车载导航其中有个叫 [DSA 软件](http://www.zenlane.com/html/index.html)，它可以记录导航的原生 NMEA 信息。
 
-这个项目就是根据这个想法而得来的，目前已经达到了可用的状态。
+因此，有考虑解析其中的信息统计并显示到地图上的想法，目前已经达到了可用的状态。
 
 ## 概述
 
@@ -29,6 +29,3 @@
 * https://github.com/xdan/datetimepicker
 * https://commons.apache.org/proper/commons-cli/
 * http://lbs.amap.com/
-
-  ​
-
