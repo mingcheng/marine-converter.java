@@ -10,3 +10,11 @@ out/
 web/json/*.json
 META*
 web/NMEA
+/build
+/gradle
+/gradlew*
+/out
+/tmp
+/.gradle
+/*.ipr
+/*.iws

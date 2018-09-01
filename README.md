@@ -1,8 +1,6 @@
-# NMEA 日志文件转换为 JSON 格式同时在地图显示
+# NMEA 日志文件转换为 JSON 格式，同时在地图显示
 
 ![http://files.gracecode.com/2015_12_22/1450775876@800.png](https://friable.rocks/_/2015_12_22/1450775876@800.png)
-
-
 
 本人实用的车载导航其中有个叫 DSA 软件的可以记录导航的原生 NMEA 信息，因此有考虑将其中的信息统计并显示到地图上的想法。
 
@@ -17,6 +15,10 @@
 
 ## 更新记录
 
+### 2018-09-01
+
+纳入 Gradle 项目管理， @TODO 优化下代码？
+
 ### 2015-12-22
 
 完成基本功能
@@ -24,12 +26,9 @@
 ## 参考资料
 
 * https://github.com/ktuukkan/marine-api
-  
 * https://github.com/xdan/datetimepicker
-  
 * https://commons.apache.org/proper/commons-cli/
-  
 * http://lbs.amap.com/
-  
+
   ​
 
