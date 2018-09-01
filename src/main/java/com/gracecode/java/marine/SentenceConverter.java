@@ -115,11 +115,7 @@ public class SentenceConverter implements SentenceListener {
 
             locationsJsonArray.put(item);
 //            locationsJsonArray.put(new double[]{location.longitude, location.latitude});
-        } catch (DataNotAvailableException e) {
-//            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (DataNotAvailableException | ParseException | IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
     }
